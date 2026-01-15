@@ -1,6 +1,6 @@
-package software.ulpgc.kata2.App;
+package software.ulpgc.kata3.App;
 
-import software.ulpgc.kata2.io.RemoteMonsterLoader;
+import software.ulpgc.kata3.io.RemoteMonsterLoader;
 
 public class Main {
     static void main() {
