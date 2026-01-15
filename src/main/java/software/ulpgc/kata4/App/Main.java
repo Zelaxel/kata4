@@ -1,11 +1,11 @@
-package software.ulpgc.kata3.App;
+package software.ulpgc.kata4.App;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import software.ulpgc.kata3.io.RemoteMonsterLoader;
-import software.ulpgc.kata3.model.Monster;
-import software.ulpgc.kata3.tasks.HistogramBuilder;
-import software.ulpgc.kata3.viewModel.Histogram;
+import software.ulpgc.kata4.io.RemoteMonsterLoader;
+import software.ulpgc.kata4.model.Monster;
+import software.ulpgc.kata4.tasks.HistogramBuilder;
+import software.ulpgc.kata4.viewModel.Histogram;
 
 import java.util.ArrayList;
 import java.util.List;
