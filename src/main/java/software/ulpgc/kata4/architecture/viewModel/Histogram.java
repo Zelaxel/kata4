@@ -1,4 +1,4 @@
-package software.ulpgc.kata4.viewModel;
+package software.ulpgc.kata4.architecture.viewModel;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -6,9 +6,11 @@ import java.util.Map;
 
 public class Histogram<T> implements Iterable<T> {
     private final Map<T, Integer> map;
+    private final Map<String, String> labels;
 
-    public Histogram() {
+    public Histogram(Map<String, String> labels) {
         map = new HashMap<>();
+        this.labels = labels;
     }
     
     public int count(T bin){
@@ -22,5 +24,21 @@ public class Histogram<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return map.keySet().iterator();
+    }
+    
+    public String title(){
+        return labels.get("title");
+    }
+
+    public String x(){
+        return labels.get("x");
+    }
+
+    public String y(){
+        return labels.get("y");
+    }
+
+    public String legend(){
+        return labels.get("legend");
     }
 }
