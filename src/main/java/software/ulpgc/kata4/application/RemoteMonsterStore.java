@@ -1,8 +1,9 @@
-package software.ulpgc.kata4.io;
+package software.ulpgc.kata4.application;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import software.ulpgc.kata4.model.Monster;
+import software.ulpgc.kata4.architecture.io.MonsterStore;
+import software.ulpgc.kata4.architecture.model.Monster;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +11,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
-public record RemoteMonsterLoader(Function<JSONObject, Monster> parser) implements MonsterLoader{
+public record RemoteMonsterStore(Function<JSONObject, Monster> parser) implements MonsterStore {
     @Override
-    public List<Monster> loadAll() {
+    public Stream<Monster> monsters() {
         try {
             return loadFrom(new URL("https://raw.githubusercontent.com/CrimsonNynja/monster-hunter-DB/refs/heads/master/monsters.json"));
         } catch (IOException e) {
@@ -21,14 +23,14 @@ public record RemoteMonsterLoader(Function<JSONObject, Monster> parser) implemen
         }
     }
 
-    private List<Monster> loadFrom(URL url) throws IOException {
+    private Stream<Monster> loadFrom(URL url) throws IOException {
         try(InputStream inputStream = url.openStream()) {
             return loadFrom(toJson(inputStream));
         }
     }
 
-    private List<Monster> loadFrom(JSONObject json) {
-        return toJsonList(json.getJSONArray("monsters")).stream().map(parser).toList();
+    private Stream<Monster> loadFrom(JSONObject json) {
+        return toJsonList(json.getJSONArray("monsters")).stream().map(parser);
     }
 
     private List<JSONObject> toJsonList(JSONArray jsonArray) {
